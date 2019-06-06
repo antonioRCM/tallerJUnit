@@ -7,6 +7,8 @@ public class CarritoCompraService {
 	
 	List<Articulo> articulos = new ArrayList<Articulo>();
 	
+	BaseDeDatosService bbservice = null;
+	
 	public void limpiarCesta(){
 		articulos = new ArrayList<Articulo>();
 	}
@@ -38,6 +40,12 @@ public class CarritoCompraService {
 		this.articulos = articulos;
 	}
 	
+	public void setBbddService(BaseDeDatosService b) {
+		this.bbservice=b;
+	}
 	
-
+	public Double aplicarDescuento(int id, double porcentaje) {
+		Articulo art = bbservice.findArticuloById(id);
+		return calculadorDescuento(art.getPrecio(), porcentaje);
+	}
 }
